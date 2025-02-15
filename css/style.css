@@ -1,0 +1,80 @@
+#parrafo1 {
+  margin: 30px 20px 30px 20px;
+  color: blue;
+  background: yellow;
+  padding: 60px;
+  border-radius: 20px;
+}
+
+#parrafo2 {
+  color: red;
+}
+
+.parrafo {
+  background-color: yellow;
+}
+
+.parrafo4 {
+  color: blue;
+}
+
+.sp1 {
+  color: red;
+}
+
+.sp2 {
+  font-family: times georgia;
+  background-color: green;
+  color: yellow;
+}
+
+#caja4 {
+  border: dashed 5px rgb(24, 180, 76);
+}
+
+#caja5 {
+  border: solid 5px rgb(187, 74, 30);
+}
+/* podemos usar margin y padding. siempre que iniciemos los estilos en css es bueno hacer esta parte. */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  font-family: times georgia, "Courier New", monospace;
+  font-size: 30px;
+  font-style: italic;
+  text-align: center;
+}
+
+.caja {
+  border: solid 5px blueviolet;
+}
+
+div {
+  border: solid 5px green;
+}
+
+h1 {
+  font-family: times georgia, "Courier New", monospace;
+  font-size: 50px;
+  text-align: center;
+}
+
+h2 {
+  font-family: times georgia, "Courier New", monospace;
+  font-size: 40px;
+  text-align: center;
+}
+
+#caja-image{
+    height: 500px;
+    width: 500px;
+    text-align: center;
+}
+
+.imagen{
+    display: flex;
+    justify-content: center;
+}
