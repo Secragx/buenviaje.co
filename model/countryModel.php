@@ -14,6 +14,10 @@ class countryModel
     {
         $query = "INSERT INTO " . $this->table . "(nombrePais) VALUES (?)";
         $stmt = $this->conn->prepare($query);
-        $stmt->execute([$name_country]);
+        if ($stmt->execute([$name_country])){
+            echo "insercion exitosa";
+        } else {
+            echo "Error en la inserción: " . implode(", ", $stmt->errorInfo());
+        }
     }
 }
