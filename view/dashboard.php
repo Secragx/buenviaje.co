@@ -9,5 +9,9 @@
     <form action="index.php?action=insertTour" method="GET">
         <button type="submit" name="action" value="insertTour">Insertar Tour</button>
     </form>
+
+    <form action="index.php?action=insertCountry" method="GET">
+        <button type="submit" name="action" value="insertCountry">Agregar Pais</button>
+    </form>
 </body>
 </html>

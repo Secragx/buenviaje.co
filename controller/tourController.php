@@ -14,7 +14,7 @@ class TourController{
     }
         
     public function insertTour(){
-        if ($_SERVER["REQUEST_METHOD"] =  "POST"){
+        if ($_SERVER["REQUEST_METHOD"] = "POST"){
             $name_tour = $_POST['nombreTour'];
             $id_destinity = $_POST['idDestino'];
             $price = $_POST['precio'];
