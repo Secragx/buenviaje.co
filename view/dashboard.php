@@ -8,6 +8,12 @@
 </head>
 
 <body>
+    <!-- BOTON CONSOLA PAISES -->
+    <div style="border: 2px solid black; padding: 10px; width: 200px;">
+        <form action="index.php?action=console_country">
+            <button type="submit" name="action" value="consolaPaises">Consola Paises</button>
+        </form>
+    </div>
     <!-- BOTON CONSOLA TOURS -->
     <div style="border: 2px solid black; padding: 10px; width: 200px;">
         <form action="index.php?action=console_tour">
@@ -16,12 +22,6 @@
     </div>
     <br>
     <br>
-    <!-- BOTON CONSOLA PAISES -->
-    <div style="border: 2px solid black; padding: 10px; width: 200px;">
-        <form action="index.php?action=console_country">
-            <button type="submit" name="action" value="consolaPaises">Consola Paises</button>
-        </form>
-    </div>
 </body>
 
 </html>
