@@ -14,6 +14,14 @@
             <button type="submit" name="action" value="consolaPaises">Consola Paises</button>
         </form>
     </div>
+
+    <!-- BOTON CONSOLA DESTINOS -->
+    <div style="border: 2px solid black; padding: 10px; width: 200px;">
+        <form action="index.php?action=console_destinity">
+            <button type="submit" name="action" value="consolaDestino">Consola Destinos</button>
+        </form>
+    </div>
+
     <!-- BOTON CONSOLA TOURS -->
     <div style="border: 2px solid black; padding: 10px; width: 200px;">
         <form action="index.php?action=console_tour">

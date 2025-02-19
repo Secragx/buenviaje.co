@@ -15,11 +15,15 @@ switch ($action) {
     case 'consolaPaises':
         include './view/console_country.php';
         break;
-
+        
+    case 'consolaDestino':
+        include './view/console_destinity.php';
+        break;
+    
     case 'consolaTour':
         include './view/console_tour.php';
         break;
-
+    
     default:
         include './view/dashboard.php';
         break;
