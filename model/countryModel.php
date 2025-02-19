@@ -9,15 +9,22 @@ class countryModel
     {
         $this->conn = $db;
     }
+    // Función obtener paises
 
-    public function insertCountry($name_country)
+    public function getCountry()
     {
-        $query = "INSERT INTO " . $this->table . "(nombrePais) VALUES (?)";
+        $query = "SELECT * FROM " . $this->table;
+        $stmt = $this->conn->query($query);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    // Función para actualizar la descripción de un país
+    public function updateCountryDescription($idPais, $descripcion)
+    {
+        $query = "UPDATE " . $this->table . " SET descripcion = :descripcion WHERE idPais = :idPais";
         $stmt = $this->conn->prepare($query);
-        if ($stmt->execute([$name_country])){
-            echo "insercion exitosa";
-        } else {
-            echo "Error en la inserción: " . implode(", ", $stmt->errorInfo());
-        }
+        $stmt->bindParam(':descripcion', $descripcion);
+        $stmt->bindParam(':idPais', $idPais);
+        return $stmt->execute();
     }
 }

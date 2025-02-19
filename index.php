@@ -12,23 +12,15 @@ $countryController = new countryController();
 $action = $_GET['action'] ?? 'dashboard';
 
 switch ($action) {
-    case 'insertTour':
-        if ($_SERVER["REQUEST_METHOD"] == "POST"){
-            $tours=$tourController->insertTour();
-        }else{
-            include './view/insert_tour.php';
-        }
+    case 'consolaPaises':
+        include './view/console_country.php';
         break;
-    case 'insertCountry':
-        if ($_SERVER["REQUEST_METHOD"] == "POST"){
-            $tours=$countryController->insertCountry();
-        }else{
-            include './view/insert_country.php';
-        }
+
+    case 'consolaTour':
+        include './view/console_tour.php';
         break;
-    
+
     default:
         include './view/dashboard.php';
-
         break;
 }
