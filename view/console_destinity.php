@@ -48,50 +48,52 @@
 </head>
 
 <body>
+    <?php
+    $destinationData = isset($destinationData) ? $destinationData : null;
+    ?>
+
     <h1>Administración de Destinos</h1>
 
     <table width="100%">
         <tr>
             <!-- Columna izquierda -->
+            <h2>Agregar y Modificar Destinos</h2>
             <td width="50%" valign="top">
-                <h2>Agregar Destino</h2>
-                <h2>Modificar Destino</h2>
-                <form action="index.php?action=updateDescription" method="POST">
+                <form action="index.php?action=updateDestination" method="POST">
+                    <!-- Campo para ID Destino -->
+                    <label for="idDestino">ID Destino:</label><br>
+                    <input type="text" name="idDestino" id="idDestino"
+                        value="<?php echo $destinationData ? htmlspecialchars($destinationData['idDestino']) : ''; ?>"
+                        <?php echo $destinationData ? 'readonly' : ''; ?>>
+                    <input type="submit" name="consultar" value="Consultar">
+                    <br><br>
+
+                    <!-- Lista de países -->
                     <label for="id_pais">Seleccione el País:</label><br>
-                    <select name="id_pais" required>
+                    <select name="id_pais" id="id_pais" required>
                         <?php
-                        // Obtener los países desde el controlador
                         require_once './controller/countryController.php';
                         $countryController = new countryController();
                         $countries = $countryController->listCountry();
 
-                        // Generar las opciones del select (lista de países)
-                        if (!empty($countries) && is_array($countries)) {
-                            foreach ($countries as $country) {
-                                echo "<option value='{$country['idPais']}'>{$country['nombrePais']}</option>";
-                            }
-                        } else {
-                            echo "<option value=''>No hay países disponibles</option>";
+                        $selectedCountry = $destinationData ? $destinationData['id_pais'] : '';
+
+                        foreach ($countries as $country) {
+                            $selected = ($country['idPais'] == $selectedCountry) ? 'selected' : '';
+                            echo "<option value='{$country['idPais']}' $selected>{$country['nombrePais']}</option>";
                         }
                         ?>
                     </select>
                     <br><br>
 
-                    <label for="descripcion">Nueva Descripción:</label><br>
-                    <textarea name="descripcion" rows="4" cols="50" required></textarea><br><br>
+                    <!-- Campo de descripción -->
+                    <label for="ciudadDestino">Ciudad Destino:</label><br>
+                    <textarea name="ciudadDestino" id="ciudadDestino" rows="4" cols="50"><?php echo $destinationData ? htmlspecialchars($destinationData['ciudadDestino']) : ''; ?></textarea>
+                    <br>
 
-                    <input type="submit" value="Guardar">
+                    <!-- Botón de guardar -->
+                    <input type="submit" name="guardar" value="Guardar">
                 </form>
-
-
-                <!-- Botón para volver al Dashboard -->
-                <div style="margin-top: 20px;">
-                    <form action="index.php" method="GET">
-                        <button type="submit">
-                            Volver al Dashboard
-                        </button>
-                    </form>
-                </div>
             </td>
 
             <!-- Columna derecha -->
@@ -108,6 +110,7 @@
                     <tbody>
                         <?php
                         require_once './controller/destinityController.php';
+                        require_once './model/destinityModel.php';
 
                         $destinityController = new destinityController();
                         $destinities = $destinityController->listDestinity();
