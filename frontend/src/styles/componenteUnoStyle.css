@@ -1,0 +1,17 @@
+.parrafoLorem{
+    background-color: yellow;
+}
+
+.img1{
+    height: 100px;
+}
+
+.img2{
+    height: 100px;
+}
+
+#componente-primero {
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}

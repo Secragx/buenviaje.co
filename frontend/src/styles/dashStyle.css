@@ -1,0 +1,11 @@
+.banner{
+    object-fit: cover;
+    object-position: center;
+}
+
+#general{
+    background-color: #ffffff;
+    background-image: url("https://www.transparenttextures.com/patterns/arches.png");
+    
+}
+

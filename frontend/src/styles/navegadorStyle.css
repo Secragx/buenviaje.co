@@ -1,0 +1,48 @@
+.turismo-font {
+    font-size: 2rem;  /* Aumenta el tamaño de la fuente */
+    font-weight: 100; /* 700 es bold, 800 es extra-bold */
+    letter-spacing: 1px; /* Espaciado entre letras para un toque moderno */
+}
+
+.voyager-frame{
+    object-fit: cover;
+    object-position: center;
+}
+
+.icon-frame{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+.navbar {
+  background-image: url('../assets/tapiz2.png'); 
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.nav-link {
+    color: #21377f;
+    font-weight: bold;
+}
+
+.btn-primary {
+    border-radius: 50px;     /* Curvatura de las esquinas */
+    color: #ffffff;          /* Texto en blanco */
+    font-weight: bold;       /* Texto en negrita */
+    background-color: #21377f; /* Color de fondo del botón */
+    border: none;            /* Sin borde */
+    padding: 12px 32px;
+}
+
+/*.custom-nav-container {
+    position: absolute; 
+    top: 50%; 
+    background-color: rgba(0, 0, 0, 0); 
+    color: white;
+    padding: 20px;
+    z-index: 1; 
+}*/

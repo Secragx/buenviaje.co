@@ -1,0 +1,31 @@
+/* Asegúrate de que el contenedor del carousel esté posicionado de forma relativa */
+.carousel-container {
+    position: relative;
+}
+
+/* Estilos de la barra de búsqueda que se superpone */
+.buscador-container {
+    position: absolute; /* Esto hace que se superponga */
+    top: 50%;           /* Centra verticalmente */
+    left: 50%;          /* Centra horizontalmente */
+    transform: translate(-50%, -50%); /* Para ajustar el centro exacto */
+    z-index: 10;        /* Asegura que esté por encima del carousel */
+}
+
+/* Puedes agregar otros estilos para la barra de búsqueda aquí */
+.custom-input {
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    box-shadow: none;
+    font-size: 16px;
+}
+
+.custom-button {
+    background-color: #21377f;
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: 1px solid #21377f;
+    color: white;
+    font-weight: bold;
+}
