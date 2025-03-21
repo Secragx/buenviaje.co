@@ -1,7 +1,7 @@
 <?php
 class Database {
     private $host = "localhost";
-    private $port = "3307"; // Asegúrate de usar el puerto correcto
+    private $port = "3307"; 
     private $db_name = "turismo_web";
     private $username = "root";
     private $password = "";
@@ -10,12 +10,19 @@ class Database {
     public function getConnection() {
         $this->conn = null;
         try {
-            $this->conn = new PDO("mysql:host=" . $this->host . ";port=" . $this->port . ";dbname=" . $this->db_name, $this->username, $this->password);
-            $this->conn->exec("set names utf8");
+            $this->conn = new PDO(
+                "mysql:host={$this->host};port={$this->port};dbname={$this->db_name}",
+                $this->username,
+                $this->password,
+                [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+            );
+            $this->conn->exec("SET NAMES utf8");
         } catch (PDOException $exception) {
-            die("Error en la conexión: " . $exception->getMessage());
+            throw new Exception("Error en la conexión a la base de datos");
         }
         return $this->conn;
     }
 }
 ?>
+
+
