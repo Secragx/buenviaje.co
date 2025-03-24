@@ -17,6 +17,34 @@ export const listCountries = async () => {
 };
 
 /** 
+ * Obtener la lista de roles 
+ */
+export const listRoles = async () => {
+  try {
+    const response = await axios.get(`${API_URL}?entity=roles`);
+    //console.log("Roles obtenidos:", response.data); // ✅ Verifica en la consola
+    return response.data;
+  } catch (error) {
+    console.error("Error al obtener roles:", error);
+    throw error;
+  }
+};
+
+/** 
+ * Obtener la lista de tipos de documento 
+ */
+export const listDocTypes = async () => {
+  try {
+    const response = await axios.get(`${API_URL}?entity=tiposDocumento`);
+    //console.log("listDocTypes obtenidos:", response.data); // ✅ Verifica en la consola
+    return response.data;
+  } catch (error) {
+    console.error("Error al obtener tipos de documento:", error);
+    throw error;
+  }
+};
+
+/** 
  * Obtener la lista de destinos 
  */
 export const listDestinations = async () => {
@@ -76,12 +104,12 @@ export const createDestination = async (ciudadDestino, idPais) => {
  */
 export const deleteDestination = async (idDestino) => {
   try {
-    console.log("Eliminando destino con ID:", idDestino);  // ✅ Verificación antes de la petición
+    //console.log("Eliminando destino con ID:", idDestino);  // ✅ Verificación antes de la petición
     const response = await axios.delete(`${API_URL}?entity=destinos`, {
       headers: { "Content-Type": "application/json" },
       data: { idDestino },
     });
-    console.log("Respuesta de la eliminación:", response.data);  // ✅ Verificación después de la petición
+    //console.log("Respuesta de la eliminación:", response.data);  // ✅ Verificación después de la petición
     return response.data;
   } catch (error) {
     console.error("Error al eliminar destino:", error);
@@ -158,6 +186,111 @@ export const deleteTour = async (idTour) => {
     return response.data;
   } catch (error) {
     console.error("Error al eliminar el tour:", error);
+    throw error;
+  }
+};
+
+/** 
+ * Iniciar sesión 
+ * @param {string} email - Correo del usuario
+ * @param {string} password - Contraseña del usuario
+ */
+export const loginUser = async (email, password) => {
+  try {
+    //console.log("credenciales antes :", { email, password });  // ✅ Verificación antes de la petición
+    const response = await axios.post(
+      `${API_URL}?entity=usuarios&action=login`,
+      { email, password },
+      { headers: { "Content-Type": "application/json" } }
+    );
+    //console.log("credenciales después :", { email, password });  // ✅ Verificación después de la petición
+    const data = response.data;
+    // ✅ Imprimir el valor de data.success
+    console.log("Respuesta del servidor:", data);
+    console.log("Valor de data.success:", data.success); 
+    if (data.success) {
+      // Guardar token y rol en localStorage o sessionStorage
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("userRole", data.user.idRol); // Guardar ID del rol
+      
+      return data;
+    } else {
+      throw new Error(data.message || "Error en el inicio de sesión");
+    }
+  } catch (error) {
+    console.error("Error en login:", error);
+    throw error;
+  }
+};
+
+
+
+/** 
+ * Obtener la lista de usuarios 
+ */
+export const listUsers = async () => {
+  try {
+    const response = await axios.get(`${API_URL}?entity=usuarios`);
+    //console.log("Usuarios obtenidos:", response.data); // ✅ Verifica en la consola
+    return response.data;
+  } catch (error) {
+    console.error("Error al obtener usuarios:", error);
+    throw error;
+  }
+};
+
+/** 
+ * Crear un nuevo usuario 
+ * @param {Object} userData - Datos del usuario
+ */
+export const createUser = async (userData) => {
+  try {
+    console.log("Datos enviados a la API:", { userData }); // ✅ Verifica los datos antes de la petición
+    const response = await axios.post(
+      `${API_URL}?entity=usuarios`,
+      userData,
+      { headers: { "Content-Type": "application/json" } }
+    );
+    console.log("Respuesta de la API:", response.data); // ✅ Verifica la respuesta de la API
+    return response.data;
+  } catch (error) {
+    console.error("Error al crear usuario:", error);
+    throw error;
+  }
+};
+
+/** 
+ * Actualizar datos de un usuario 
+ * @param {number} idUsuario - ID del usuario a actualizar
+ * @param {Object} userData - Datos actualizados
+ */
+export const updateUser = async (idUsuario, userData) => {
+  try {
+    const response = await axios.put(
+      `${API_URL}?entity=usuarios&idUsuario=${idUsuario}`,
+      userData,
+      { headers: { "Content-Type": "application/json" } }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error al actualizar usuario:", error);
+    throw error;
+  }
+};
+
+/** 
+ * Eliminar un usuario 
+ * @param {number} idUsuario - ID del usuario a eliminar
+ */
+export const deleteUser = async (idUsuario) => {
+  try {
+    const response = await axios.delete(`${API_URL}?entity=usuarios`, {
+      headers: { "Content-Type": "application/json" },
+      data: { idUsuario },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error al eliminar usuario:", error);
     throw error;
   }
 };

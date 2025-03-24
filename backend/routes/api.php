@@ -8,10 +8,15 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization");
 include_once "../controllers/CountryController.php";
 include_once "../controllers/DestinationController.php";
 include_once "../controllers/TourController.php"; 
+include_once '../controllers/UserController.php';
+include_once '../controllers/RolController.php';
+include_once '../controllers/DocTypeController.php';
+
 
 
 // Obtener la entidad de la URL (por ejemplo: ?entity=destinations)
 $entity = $_GET["entity"] ?? "";
+$action = $_GET["action"] ?? "";
 $method = $_SERVER["REQUEST_METHOD"];
 
 if ($entity === "paises") {
@@ -34,6 +39,24 @@ if ($entity === "paises") {
         echo json_encode(["message" => "Método no permitido para countries"]);
     }
 
+} elseif ($entity == "tiposDocumento") {
+    $controller = new DocTypeController();
+
+    if ($method === "GET") {
+        echo json_encode($controller->listDocTypes());
+    } else {
+        echo json_encode(["message" => "Método no permitido para tipos de documentos"]);
+    }
+    
+} elseif ($entity == "roles") {
+    $controller = new RolController();
+
+    if ($method === "GET") {
+        echo json_encode($controller->listRoles());
+    } else {
+        echo json_encode(["message" => "Método no permitido para roles"]);
+    }
+    
 } elseif ($entity === "destinos") {
     $controller = new DestinationController();
 
@@ -112,6 +135,82 @@ if ($entity === "paises") {
 
     } else {
         echo json_encode(["message" => "Método no permitido para tours"]);
+    }
+
+} elseif ($entity === "usuarios" && $action === "login") {
+    $controller = new UserController();
+
+    if ($method === "POST") {
+        $data = json_decode(file_get_contents("php://input"), true);
+
+        // Depurar datos recibidos
+        //header('Content-Type: application/json'); // Para evitar problemas de formato en la respuesta
+        //echo json_encode(["debug" => $data]);  
+        //exit;
+
+
+        $email = $data['email'] ?? null;
+        $password = $data['password'] ?? null;
+
+        if (!$email || !$password) {
+            echo json_encode(["error" => "Email y contraseña son obligatorios"]);
+            exit;
+        }
+
+        $result = $controller->loginUser($email, $password);
+        echo json_encode($result);
+    } else {
+        echo json_encode(["message" => "Método no permitido para login"]);
+    }
+} elseif ($entity === "usuarios") {
+    $controller = new UserController();
+
+    if ($method === "GET") {
+        echo json_encode($controller->listUsers());
+    } elseif ($method === "POST") {
+        $data = json_decode(file_get_contents("php://input"), true);
+
+        if (!isset($data['nombre'], $data['apellido'], $data['email'], 
+                   $data['passwordHash'], $data['telefono'], $data['fechaRegistro'], 
+                   $data['idRol'], $data['idTipoDocumento'], $data['numeroIdentificacion'])) {
+            echo json_encode(["error" => "Todos los campos son obligatorios"]);
+            exit;
+        }
+
+        $result = $controller->createUser($data);
+        echo json_encode($result);
+
+    } elseif ($method === "PUT") {
+        $data = json_decode(file_get_contents("php://input"), true);
+        $idUsuario = $_GET["idUsuario"] ?? null;
+
+        if (!$idUsuario) {
+            echo json_encode(["error" => "ID de usuario no proporcionado"]);
+            exit;
+        }
+
+        if (empty($data)) {
+            echo json_encode(["error" => "No hay datos para actualizar"]);
+            exit;
+        }
+
+        $result = $controller->updateUser($idUsuario, $data);
+        echo json_encode($result);
+
+    } elseif ($method === "DELETE") {
+        $data = json_decode(file_get_contents("php://input"), true);
+        $idUsuario = $data["idUsuario"] ?? null;
+
+        if (!$idUsuario) {
+            echo json_encode(["error" => "ID de usuario no proporcionado"]);
+            exit;
+        }
+
+        $result = $controller->deleteUser($idUsuario);
+        echo json_encode($result);
+
+    } else {
+        echo json_encode(["message" => "Método no permitido para usuarios"]);
     }
 
 } else {

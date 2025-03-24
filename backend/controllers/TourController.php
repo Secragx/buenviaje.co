@@ -7,8 +7,7 @@ class TourController
     private $db;
     private $tour;
 
-    public function __construct()
-    {
+    public function __construct(){
         $database = new Database();
         $this->db = $database->getConnection();
         $this->tour = new Tour($this->db);
@@ -19,7 +18,7 @@ class TourController
         return $this->tour->getTour();
     }
 
-    // Crear un nuevo tour
+    // Create new tour
     public function createTour($data)
     {
         if (

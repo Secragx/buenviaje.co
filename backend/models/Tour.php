@@ -72,3 +72,4 @@ class Tour
         return $stmt->execute($values);
     }
 }
+?>

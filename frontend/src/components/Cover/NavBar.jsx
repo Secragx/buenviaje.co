@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import icon from '../../assets/icon.png'
+//import icon from '../../assets/icon.png'
 import buenviaje from '../../assets/buenviaje.svg'
 import '../../styles/cover/navBarStyle.css'
 
@@ -51,7 +51,7 @@ export default function NavBar() {
                                 {/*<a className="nav-link" href="#">Login</a>*/}
                             </li>
                         </ul>
-                        <Link to="/Login" type="button" className="btn btn-primary">
+                        <Link to="/login" type="button" className="btn btn-primary">
                         Login
                         </Link>
                         {/*<form className="d-flex" role="search">

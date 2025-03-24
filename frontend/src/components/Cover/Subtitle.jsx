@@ -1,6 +1,6 @@
 import React from 'react'
 import '../../styles/cover/subtitleStyle.css'
-import logo from '../../assets/react.svg'
+//import logo from '../../assets/react.svg'
 
 export default function Subtitle() {
   return (
